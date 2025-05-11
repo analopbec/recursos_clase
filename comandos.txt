@@ -1,0 +1,240 @@
+
+--------------------------
+ver carpeta donde estas: cd
+listar los archivos: ls
+listar archivos ocultos: ls -la
+
+npm:
+entorno para ejecutar javascript fuera del navegador que convierte codigo de maquina en codigo no se que 
+
+
+Movernos entre carpetas:
+cd nombre_de_carpeta    # Entra en una carpeta cd= change directory
+cd .                    # me dice el directorio actual
+cd ..                   # Sube un nivel
+cd ../..                # sube dos niveles
+./nombre_del_archivo    # hace referencia o abre un archivo dentro del directorio actual
+cd /ruta/completa       # Ve a una ruta específica
+cd ~                    # Vuelve a la carpeta de usuario
+cd -                    # Vuelve a la última carpeta en la que estabas
+mkdir nombre_carpeta    # Crea una carpeta make directory
+rmdir nombre_carpeta    # Borra una carpeta vacía
+rm -r nombre_carpeta    # Borra una carpeta con archivos dentro (Linux/macOS) es recursivo para que no pregunte poner rm -rf
+touch archivo.txt       # Crea un archivo vacío (Linux/macOS)
+echo "" > archivo.txt   # También sirve para crear un archivo vacío
+del archivo.txt         # Borra un archivo en Windows
+rm archivo.txt          # Borra un archivo en Linux/macOS
+code .                  # Abre VS Code en la carpeta actual
+code nombre_archivo     # Abre un archivo específico
+ls                      # ver archivos de la carpeta donde estoy 
+
+-------------------
+algo -v        # verificar versión
+-------------------
+Node + npm:
+1: npm init o npm init -y (corre todo por defecto)
+2: completar nombre, resto enter 
+3: se crea el paquete
+4: agregar en scripts "start": "node index.js",
+5: para arrancar se usa npm start, es lo mismo que hacer node index.js
+
+npm install -D nodemon
+-D (dependencia para desarrollo)
+npm instal lodash
+
+agregar en scripts
+"dev": "nodemon index.js",
+
+para correrlo: npm run dev
+----------------------
+##Servidor web
+usar dependencia que se llama express
+npm i express
+
+listen(Puerto)
+
+recibir solicitudes:
+- path
+- get --> 200 ok
+- post --> 201 created
+- delete --> 200 ok // 204 No content
+- Put --> recurso completo --> 200
+- patch --> ? --> 200
+
+Respuesra
+- codigo
+- 
+
+
+
+
+----------------------
+
+Modifiquemos la aplicación para convertirla en un servidor web editando el archivo index.js de la siguiente manera:
+
+const http = require('http')
+
+const app = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain' })
+  response.end('Hola mundo!!!')
+})
+
+const PORT = 3000
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
+
+
+PARA ABRIR: http://localhost:3000/
+-------------------
+
+const app = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain' })
+  response.end('Hola mundo!!!')
+})
+
+Forma moderna de utilizar Javascript. Vamos a empezar a utilizar lo que es tipo “módulos”.
+
+Agregar al archivo package.json la siguiente línea:
+
+{
+  ...
+  "type": "module",
+  ...
+}
+Cambiar la primera línea del código de index.js:
+
+const http = require('http')
+
+Por la siguiente:
+import http from 'http'
+
+-------------------
+ara instalar el paquete express usemos el siguiente comando:
+
+npm install express
+
+La dependencia también se agrega a nuestro archivo package.json:
+
+"dependencies": {
+    "express": "^4.19.2"
+  }
+
+Modifiquemos la aplicación para convertirla en un servidor web usando express:
+
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hola mundo!!!</h1>')
+})
+
+const PORT = 3000
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
+
+La aplicación no sufrió grandes cambios. Desde el inicio de nuestro código, estamos importando Express, que en esta ocasión es una función utilizada para crear una aplicación Express que se guarda en la variable app:
+
+import express from 'express'
+const app = express()
+
+Luego, definimos una ruta para la aplicación. Está establece un controlador de eventos que se encarga de manejar las solicitudes HTTP GET dirigidas a la raíz (/) de la aplicación:
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hola mundo!!!</h1>')
+})
+
+La función del controlador de eventos recibe dos parámetros: el primero, request, contiene toda la información de la solicitud HTTP, mientras que el segundo, response, se utiliza para definir cómo se responde a la solicitud.
+
+En el código, la respuesta a la solicitud se genera utilizando el método send del objeto response. Al llamar a este método, el servidor responde a la solicitud HTTP enviando un string con el contenido <h1>Hello World!</h1>. Como este parámetro es un string, Express configura automáticamente el encabezado Content-Type como text/html. El código de estado de la respuesta, por defecto, es 200.
+
+-------------------
+
+git init
+git remote -v
+git remote remove origin
+// si no funciona el gitignore: git rm -r --cached node_modules
+git commit -m "Ignorar la carpeta node_modules"
+git remote add origin https://github.com/analopbec/TP2_EQUI.git
+git add .
+git commit -m "Primer commit: Subiendo contenido de la carpeta equi"
+git branch -M main
+git push -u origin main
+
+cambios
+git add .
+git status
+git commit -m "detalle"
+git push
+
+---------------
+
+# 🔹 Configuración inicial (solo una vez)
+git config --global user.name "analopbec"
+git config --global user.email "analialopezbecerra@live.com.ar"
+git config --global core.editor "code --wait"
+
+# 🔹 Verificar configuración
+git config --list
+
+# 🔹 Crear un repositorio nuevo
+git init  
+
+# 🔹 Clonar un repositorio desde GitHub
+git clone URL_DEL_REPOSITORIO  
+
+# 🔹 Ver el estado del repositorio
+git status  
+git log  
+git log --oneline  
+
+# 🔹 Agregar y confirmar cambios
+git add .  
+git commit -m "Mensaje del cambio"  
+
+# 🔹 Subir cambios a GitHub
+git push origin main  
+
+# 🔹 Descargar cambios desde GitHub
+git pull origin main  
+
+# 🔹 Administrar ramas
+git branch  
+git branch nueva-rama  
+git checkout nueva-rama  
+git checkout -b nueva-rama  
+git merge nombre-de-la-rama  
+git branch -d nombre-de-la-rama  
+
+# 🔹 Deshacer cambios
+git restore nombre_archivo  
+git reset HEAD nombre_archivo  
+git reset --soft HEAD~1  
+git reset --hard HEAD~1  
+
+# 🔹 Administrar repositorio remoto
+git remote -v  
+git remote add origin URL_DEL_REPOSITORIO  
+git remote remove origin  
+
+# 🔹 Otros comandos útiles
+git diff  
+git stash  
+git stash pop  
+
+
+-----------
+DESDE EL ESCRITORIO A GIT
+
+1. crear repo vacio en git
+2. abrir carpeta en la consola (ls para chequear archivos)
+3. git init
+4. git remote add origin https://github.com/TU_USUARIO/api-productos.git
+5. git remote -v
+6. git add .
+7. git commit -m "Primer commit - Subir proyecto inicial"
+8. git branch -M main o git push -u origin main
+
+Para cargar cambios
+git add .
+git commit -m "Descripción de los cambios"
+git push
