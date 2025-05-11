@@ -238,3 +238,33 @@ Para cargar cambios
 git add .
 git commit -m "Descripción de los cambios"
 git push
+
+--------------
+
+
+✅ Cómo Ignorar Varias Carpetas node_modules en Distintas Ubicaciones
+	1.	Asegúrate de tener un archivo .gitignore en el directorio raíz de tu proyecto.
+	2.	Agrega las siguientes líneas al archivo .gitignore:
+
+# Ignorar todas las carpetas node_modules en cualquier subcarpeta
+**/node_modules
+
+
+⸻
+
+✅ ¿Qué significa esto?
+	•	El patrón **/node_modules indica que todas las carpetas node_modules dentro del proyecto serán ignoradas, sin importar su ubicación.
+	•	Esto cubre:
+	•	api_productos/node_modules
+	•	pruebs/node_modules
+	•	Simulacro/node_modules
+
+✅ ¿Cómo aplicar este .gitignore si ya subiste las carpetas?
+	•	Si las carpetas node_modules ya fueron subidas, debes eliminarlas del control de versiones:
+
+git rm -r --cached api_productos/node_modules
+git rm -r --cached pruebs/node_modules
+git rm -r --cached Simulacro/node_modules
+git add .
+git commit -m "Eliminar node_modules del control de versiones"
+git push
